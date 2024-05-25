@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR - Optical Character Recognition</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #0f0f0f;
+            color: #00ff00;
+            text-align: center;
+            padding: 50px;
+        }
+        h1, h2 {
+            font-size: 2.5em;
+            animation: fadeIn 2s;
+        }
+        h1 {
+            color: #00ff00;
+        }
+        h2 {
+            color: #00cc00;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        form {
+            margin: 20px auto;
+            border: 1px solid #00ff00;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            color: #00ff00;
+            background-color: #0f0f0f;
+            border: 1px solid #00ff00;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #00ff00;
+            background-color: #0f0f0f;
+            border: 1px solid #00ff00;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #00ff00;
+            color: #0f0f0f;
+        }
+        img {
+            max-width: 80%;
+            height: auto;
+            margin: 20px 0;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            animation: fadeIn 2s;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            font-size: 1.2em;
+            margin: 10px 0;
+            animation: fadeIn 2s;
+        }
+    </style>
+</head>
+<body>
+    <h1>OCR - Optical Character Recognition</h1>
+    
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept=".png, .jpg, .jpeg">
+        <button type="submit">Recognize Text</button>
+    </form>
+
+    {% if image %}
+        <h2>Prediction Results</h2>
+        <img src="data:image/png;base64,{{ image }}" alt="Prediction Results">
+
+        <h2>Recognized Words</h2>
+        <ul>
+            {% for word in recognized_words %}
+                <li>{{ word }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
